@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Package Managers</title>
+        <title>Jumplist</title>
 
 
         <!-- Custom HTML head -->
@@ -131,7 +131,7 @@
                         <a href="https://github.com/helix-editor/helix" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/helix-editor/helix/edit/master/book/src/package-managers.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/helix-editor/helix/edit/master/book/src/jumplist.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -160,130 +160,64 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="package-managers"><a class="header" href="#package-managers">Package managers</a></h2>
+                        <h2 id="using-the-jumplist"><a class="header" href="#using-the-jumplist">Using the jumplist</a></h2>
+<p>To help with quick navigation, Helix maintains a list of "jumps" called the jumplist.
+Whenever you make a significant movement (see next section), Helix stores your selections from before the move as a jump.
+A jump serves as a kind of checkpoint, allowing you to jump to a separate location, make edits, and return to where you were with your previous selections.
+This way, the jumplist tracks both your previous location and your selections.
+You can manually save a jump by using <code>Ctrl-s</code>.
+To jump backward in the jumplist, use <code>Ctrl-o</code>; to go forward, use <code>Ctrl-i</code>. To view and select from the full jumplist, use <code>Space-j</code> to open the jumplist picker.</p>
+<h3 id="what-makes-a-jump"><a class="header" href="#what-makes-a-jump">What makes a jump</a></h3>
+<p>The following is a non-exhaustive list of which actions add a jump to the jumplist:</p>
 <ul>
-<li><a href="#linux">Linux</a>
+<li>Switching buffers
 <ul>
-<li><a href="#debian">Debian</a></li>
-<li><a href="#ubuntumint">Ubuntu/Mint</a></li>
-<li><a href="#fedorarhel">Fedora/RHEL</a></li>
-<li><a href="#arch-linux-extra">Arch Linux extra</a></li>
-<li><a href="#nixos">NixOS</a></li>
-<li><a href="#flatpak">Flatpak</a></li>
-<li><a href="#snap">Snap</a></li>
-<li><a href="#appimage">AppImage</a></li>
+<li>Using the buffer picker, going to the next/previous buffer</li>
+<li>Going to the last accessed/modified file</li>
+<li>Making a new file (<code>:new FILE</code>)</li>
+<li>Opening a file (<code>:open FILE</code>)
+<ul>
+<li>Includes <code>:log-open</code>, <code>:config-open</code>, <code>:config-open-workspace</code>, <code>:tutor</code></li>
 </ul>
 </li>
-<li><a href="#macos">macOS</a>
-<ul>
-<li><a href="#homebrew-core">Homebrew Core</a></li>
-<li><a href="#macports">MacPorts</a></li>
+<li>Navigating by pickers, global search, or the file explorer</li>
+<li><code>goto_file</code> (<code>gf</code>)</li>
 </ul>
 </li>
-<li><a href="#windows">Windows</a>
+<li>Big in-file movements
 <ul>
-<li><a href="#winget">Winget</a></li>
-<li><a href="#scoop">Scoop</a></li>
-<li><a href="#chocolatey">Chocolatey</a></li>
-<li><a href="#msys2">MSYS2</a></li>
+<li><code>select_regex</code> (<code>s</code>)</li>
+<li><code>split_regex</code> (<code>S</code>)</li>
+<li><code>search</code> (<code>/</code>)</li>
+<li><code>keep_selections</code> and <code>remove_selections</code> (<code>K</code> and <code>&lt;A-K&gt;</code>)</li>
+<li><code>goto_file_start</code> (<code>gg</code>)</li>
+<li><code>goto_file_end</code></li>
+<li><code>goto_last_line</code> (<code>ge</code>)</li>
+<li><code>:goto 123</code> / <code>:123</code> / <code>123G</code></li>
+<li><code>goto_definition</code> (<code>gd</code>)</li>
+<li><code>goto_declaration</code> (<code>gD</code>)</li>
+<li><code>goto_type_definition</code> (<code>gy</code>)</li>
+<li><code>goto_reference</code> (<code>gr</code>)</li>
+</ul>
+</li>
+<li>Other
+<ul>
+<li><code>Ctrl-s</code> manually creates a jump</li>
+<li>Trying to close a modified buffer can switch you to that buffer and create a jump</li>
+<li>The debugger can create jumps as you jump stack frames</li>
 </ul>
 </li>
 </ul>
-<p><a href="https://repology.org/project/helix-editor/versions"><img src="https://repology.org/badge/vertical-allrepos/helix-editor.svg" alt="Packaging status" /></a></p>
-<h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
-<p>The following third party repositories are available:</p>
-<h3 id="debian"><a class="header" href="#debian">Debian</a></h3>
-<pre><code class="language-sh">sudo apt install hx
-</code></pre>
-<p>If you are running a system older than Debian 13, follow the steps for
-<a href="#ubuntumint">Ubuntu/Mint</a>.</p>
-<h3 id="ubuntumint"><a class="header" href="#ubuntumint">Ubuntu/Mint</a></h3>
-<p>Install the Debian package <a href="https://github.com/helix-editor/helix/releases/latest">from the release page</a>.</p>
-<p>If you are running a system older than Ubuntu 22.04, Mint 21, or Debian 12, you can build the <code>.deb</code> file locally
-<a href="./building-from-source.html#building-the-debian-package">from source</a>.</p>
-<h3 id="fedorarhel"><a class="header" href="#fedorarhel">Fedora/RHEL</a></h3>
-<pre><code class="language-sh">sudo dnf install helix
-</code></pre>
-<h3 id="arch-linux-extra"><a class="header" href="#arch-linux-extra">Arch Linux extra</a></h3>
-<p>Releases are available in the <code>extra</code> repository:</p>
-<pre><code class="language-sh">sudo pacman -S helix
-</code></pre>
-<blockquote>
-<p>💡 When installed from the <code>extra</code> repository, run Helix with <code>helix</code> instead of <code>hx</code>.</p>
-<p>For example:</p>
-<pre><code class="language-sh">helix --health
-</code></pre>
-<p>to check health</p>
-</blockquote>
-<p>Additionally, a <a href="https://aur.archlinux.org/packages/helix-git/">helix-git</a> package is available
-in the AUR, which builds the master branch.</p>
-<h3 id="nixos"><a class="header" href="#nixos">NixOS</a></h3>
-<p>Helix is available in <a href="https://github.com/nixos/nixpkgs">nixpkgs</a> through the <code>helix</code> attribute,
-the unstable channel usually carries the latest release.</p>
-<p>Helix is also available as a <a href="https://wiki.nixos.org/wiki/Flakes">flake</a> in the project
-root. Use <code>nix develop</code> to spin up a reproducible development shell. Outputs are
-cached for each push to master using <a href="https://www.cachix.org/">Cachix</a>. The
-flake is configured to automatically make use of this cache assuming the user
-accepts the new settings on first use.</p>
-<p>If you are using a version of Nix without flakes enabled,
-<a href="https://docs.cachix.org/installation">install Cachix CLI</a> and use
-<code>cachix use helix</code> to configure Nix to use cached outputs when possible.</p>
-<h3 id="flatpak"><a class="header" href="#flatpak">Flatpak</a></h3>
-<p>Helix is available on <a href="https://flathub.org/en-GB/apps/com.helix_editor.Helix">Flathub</a>:</p>
-<pre><code class="language-sh">flatpak install flathub com.helix_editor.Helix
-flatpak run com.helix_editor.Helix
-</code></pre>
-<h3 id="snap"><a class="header" href="#snap">Snap</a></h3>
-<p>Helix is available on <a href="https://snapcraft.io/helix">Snapcraft</a> and can be installed with:</p>
-<pre><code class="language-sh">snap install --classic helix
-</code></pre>
-<p>This will install Helix as both <code>/snap/bin/helix</code> and <code>/snap/bin/hx</code>, so make sure <code>/snap/bin</code> is in your <code>PATH</code>.</p>
-<h3 id="appimage"><a class="header" href="#appimage">AppImage</a></h3>
-<p>Install Helix using the Linux <a href="https://appimage.org/">AppImage</a> format.
-Download the official Helix AppImage from the <a href="https://github.com/helix-editor/helix/releases/latest">latest releases</a> page.</p>
-<pre><code class="language-sh">chmod +x helix-*.AppImage # change permission for executable mode
-./helix-*.AppImage # run helix
-</code></pre>
-<p>You can optionally <a href="./building-from-source.html#configure-the-desktop-shortcut">add the <code>.desktop</code> file</a>. Helix must be installed in <code>PATH</code> with the name <code>hx</code>. For example:</p>
-<pre><code class="language-sh">mkdir -p "$HOME/.local/bin"
-mv helix-*.AppImage "$HOME/.local/bin/hx"
-</code></pre>
-<p>and make sure <code>~/.local/bin</code> is in your <code>PATH</code>.</p>
-<h2 id="macos"><a class="header" href="#macos">macOS</a></h2>
-<h3 id="homebrew-core"><a class="header" href="#homebrew-core">Homebrew Core</a></h3>
-<pre><code class="language-sh">brew install helix
-</code></pre>
-<h3 id="macports"><a class="header" href="#macports">MacPorts</a></h3>
-<pre><code class="language-sh">sudo port install helix
-</code></pre>
-<h2 id="windows"><a class="header" href="#windows">Windows</a></h2>
-<p>Install on Windows using <a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">Winget</a>, <a href="https://scoop.sh/">Scoop</a>, <a href="https://chocolatey.org/">Chocolatey</a>
-or <a href="https://msys2.org/">MSYS2</a>.</p>
-<h3 id="winget"><a class="header" href="#winget">Winget</a></h3>
-<p>Windows Package Manager winget command-line tool is by default available on Windows 11 and modern versions of Windows 10 as a part of the App Installer.
-You can get <a href="https://www.microsoft.com/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab">App Installer from the Microsoft Store</a>. If it's already installed, make sure it is updated with the latest version.</p>
-<pre><code class="language-sh">winget install Helix.Helix
-</code></pre>
-<h3 id="scoop"><a class="header" href="#scoop">Scoop</a></h3>
-<pre><code class="language-sh">scoop install helix
-</code></pre>
-<h3 id="chocolatey"><a class="header" href="#chocolatey">Chocolatey</a></h3>
-<pre><code class="language-sh">choco install helix
-</code></pre>
-<h3 id="msys2"><a class="header" href="#msys2">MSYS2</a></h3>
-<p>For 64-bit Windows 8.1 or above:</p>
-<pre><code class="language-sh">pacman -S mingw-w64-ucrt-x86_64-helix
-</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="install.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="pickers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="building-from-source.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="keymap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -293,11 +227,11 @@ You can get <a href="https://www.microsoft.com/p/app-installer/9nblggh4nns1#acti
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="install.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="pickers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="building-from-source.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="keymap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
